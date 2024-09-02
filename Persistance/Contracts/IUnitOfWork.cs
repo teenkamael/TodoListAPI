@@ -6,7 +6,7 @@ public interface IUnitOfWork
         IStatusRepository StatusRepository {get;}
         IStatusItemTypesRepository StatusItemTypesRepository {get;}
         IItemTypesRepository ItemTypesRepository {get;}
-        IItemRepository ItemRepository {get;}
+        IItemsRepository ItemRepository {get;}
 		void DisposeContext ();
 		Task<int> CommitAsync ();
 	}

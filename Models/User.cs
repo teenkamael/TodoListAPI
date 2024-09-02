@@ -5,9 +5,6 @@ namespace ToDoListApi.Models{
     [Table("Users")]
     public class User : AbstractModel
     {
-        [Key]
-        [Column("id")]
-        public int Id { get; set; }
 
         [Required(ErrorMessage = "User name cannot be empty")]
         [Column("name")]

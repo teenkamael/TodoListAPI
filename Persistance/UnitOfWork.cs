@@ -9,10 +9,10 @@ namespace ToDoListApi.Persistance
         public IStatusRepository StatusRepository {get; private set; }
         public IStatusItemTypesRepository StatusItemTypesRepository {get; private set; }
         public IItemTypesRepository ItemTypesRepository {get; private set; }
-        public IItemRepository ItemRepository {get; private set; }
+        public IItemsRepository ItemRepository {get; private set; }
         private bool disposed = false;
         public UnitOfWork(AppDbContext appDbContext, IUsersRepository usersRepository, IStatusRepository statusRepository,
-                            IStatusItemTypesRepository statusItemTypesRepository, IItemTypesRepository itemTypesRepository, IItemRepository itemRepository)
+                            IStatusItemTypesRepository statusItemTypesRepository, IItemTypesRepository itemTypesRepository, IItemsRepository itemRepository)
         {
             _appDbContext = appDbContext;
             UsersRepository = usersRepository;

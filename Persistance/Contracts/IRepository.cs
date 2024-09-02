@@ -1,10 +1,12 @@
+using ToDoListApi.Models;
+
 namespace ToDoListApi.Persistance.Contracts{
-    public interface IRepository<T> where T : class
+    public interface IRepository<T> where T : AbstractModel
 	{
 		Task AddAsync(T entity);
 		T Update(T entity);
-		Task<bool> DeleteAsync(Guid id);
-		Task<T?> FindAsync(Guid id);
+		Task<bool> DeleteAsync(int id);
+		Task<T?> FindAsync(int id);
 		Task<List<T>> GetAllAsync();
 	}
 }

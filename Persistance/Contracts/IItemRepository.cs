@@ -1,7 +1,7 @@
 using ToDoListApi.Models;
 
 namespace ToDoListApi.Persistance.Contracts{
-    public interface IItemRepository : IRepository<Item>
+    public interface IItemsRepository : IRepository<Item>
 	{
 	}
 }

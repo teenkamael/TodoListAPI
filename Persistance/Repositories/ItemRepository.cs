@@ -3,9 +3,9 @@ using ToDoListApi.Models;
 using ToDoListApi.Persistance.Contracts;
 
 namespace ToDoListApi.Persistance.Repositories{
-    public class ItemRepository : Repository<Item>, IItemRepository
+    public class ItemsRepository : Repository<Item>, IItemsRepository
 	{
-		public ItemRepository (AppDbContext dbContext) : base(dbContext)
+		public ItemsRepository (AppDbContext dbContext) : base(dbContext)
 		{
 		}
 	}

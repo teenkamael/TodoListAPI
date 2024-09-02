@@ -8,9 +8,6 @@ namespace ToDoListApi.Models
     [Table("Items")]
     public class Item : AbstractModel, INameAndDescription
     {
-        [Key]
-        [Column("id")]
-        public int Id { get; set; }
 
         [Column("name")]
         [Required(ErrorMessage = "Item name cannot be empty")]
@@ -21,10 +18,15 @@ namespace ToDoListApi.Models
 
         [Column("status_id")]
         [Required(ErrorMessage = "Item StatusId cannot be empty")]
-        public string StatusId { get; set; }
+        public int StatusId { get; set; }
 
         [Column("itemType_id")]
         [Required(ErrorMessage = "Item ItemTypeId cannot be empty")]
-        public string ItemTypeId { get; set; }
+        public int ItemTypeId { get; set; }
+
+        [Column("parent_item_id")]
+        public int? ParentItemId { get; set; }
+
+        public ICollection<Item> Childs { get; set; }
     }
 }

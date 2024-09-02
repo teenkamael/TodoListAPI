@@ -8,9 +8,6 @@ namespace ToDoListApi.Models
     [Table("Status")]
     public class Status : AbstractModel, INameAndDescription
     {
-        [Key]
-        [Column("id")]
-        public int Id { get; set; }
 
         [Column("name")]
         [Required(ErrorMessage = "Status name cannot be empty")]
@@ -19,6 +16,6 @@ namespace ToDoListApi.Models
         [Column("description")]
         public string Description { get; set; }
 
-        public IEnumerable<ItemType> ItemTypes { get; set; }
+        public ICollection<ItemType> ItemTypes { get; set; }
     }
 }

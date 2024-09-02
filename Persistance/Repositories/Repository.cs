@@ -1,8 +1,10 @@
 using Microsoft.EntityFrameworkCore;
+using ToDoListApi.Models;
 using ToDoListApi.Persistance.Contracts;
+using ToDoListApi.Utils.Temp;
 
 namespace ToDoListApi.Persistance.Repositories{
-    public class Repository<T> : IRepository<T> where T : class
+    public class Repository<T> : IRepository<T> where T : AbstractModel
 	{
 		private readonly AppDbContext dbContext;
 		public Repository (AppDbContext dbContext)
@@ -13,10 +15,11 @@ namespace ToDoListApi.Persistance.Repositories{
 
 		public async Task AddAsync (T entity)
 		{
-			await dbContext.Set<T>().AddAsync (entity);
+			StartTransaction(entity);
+			await dbContext.Set<T>().AddAsync(entity);
 		}
 
-		public async Task<bool> DeleteAsync (Guid id)
+		public async Task<bool> DeleteAsync (int id)
 		{
 			var entity = await FindAsync (id);
 
@@ -24,12 +27,13 @@ namespace ToDoListApi.Persistance.Repositories{
 			{
 				return false;
 			}
-
+			
+			StartTransaction(entity);
 			dbContext.Set<T>().Remove(entity);
 			return true;
 		}
 
-		public async Task<T?> FindAsync (Guid id)
+		public async Task<T?> FindAsync (int id)
 		{
 			return await dbContext.Set<T>().FindAsync(id);
 		}
@@ -41,8 +45,24 @@ namespace ToDoListApi.Persistance.Repositories{
 
 		public T Update (T entity)
 		{
-			dbContext.Set<T>().Update (entity);	
+			StartTransaction(entity);
+			dbContext.Set<T>().Update(entity);	
 			return entity;
 		}
+
+		private void StartTransaction(T entity){
+			var dbData = dbContext.Set<T>().FirstOrDefault(x => entity.Id == x.Id);
+			entity.GetUserData(); //Deletion or method modification needed when authorization manager is completed.
+			if (dbData != null){
+				entity.CreatedAt = dbData.CreatedAt;
+				entity.CreatedBy = dbData.CreatedBy;
+				entity.UpdatedAt = DateTime.Now.ToUniversalTime();
+			}
+			else{
+				entity.CreatedAt = DateTime.Now.ToUniversalTime();
+				entity.UpdatedAt = DateTime.Now.ToUniversalTime();
+			}
+		}
+		
 	}
 }
