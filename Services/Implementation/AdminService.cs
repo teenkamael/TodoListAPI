@@ -12,7 +12,7 @@ namespace ToDoListApi.Services.Implementation{
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<bool> AddItemTypeAndStatusRelation(Types.Enums.TaskStatus taskStatus, ItemTypesEnum itemType)
+        public async Task<bool> AddItemTypeAndStatusRelation(Types.Enums.ItemStatus taskStatus, ItemTypesEnum itemType)
         {
             var dbItemType = await _unitOfWork.ItemTypesRepository.FindAsync((int)itemType);
             var dbStatus = await _unitOfWork.StatusRepository.FindAsync((int)taskStatus);

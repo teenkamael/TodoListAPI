@@ -15,7 +15,7 @@ namespace ToDoListApi.Controller
             _adminService = adminService;
         }
 
-        public async Task<IActionResult> AddStatusItemTypeRelation(Types.Enums.TaskStatus status, ItemTypesEnum itemType){
+        public async Task<IActionResult> AddStatusItemTypeRelation(Types.Enums.ItemStatus status, ItemTypesEnum itemType){
             if(await _adminService.AddItemTypeAndStatusRelation(status, itemType)){
                 return NoContent();
             }

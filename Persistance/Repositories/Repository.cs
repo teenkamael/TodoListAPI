@@ -54,7 +54,7 @@ namespace ToDoListApi.Persistance.Repositories{
 			var dbData = dbContext.Set<T>().FirstOrDefault(x => entity.Id == x.Id);
 			entity.GetUserData(); //Deletion or method modification needed when authorization manager is completed.
 			if (dbData != null){
-				entity.CreatedAt = dbData.CreatedAt;
+				entity.CreatedAt = dbData.CreatedAt.ToUniversalTime();
 				entity.CreatedBy = dbData.CreatedBy;
 				entity.UpdatedAt = DateTime.Now.ToUniversalTime();
 			}

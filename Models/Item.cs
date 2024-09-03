@@ -26,7 +26,5 @@ namespace ToDoListApi.Models
 
         [Column("parent_item_id")]
         public int? ParentItemId { get; set; }
-
-        public ICollection<Item> Childs { get; set; }
     }
 }
